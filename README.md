@@ -6,11 +6,13 @@
 ![Crates.io Size](https://img.shields.io/crates/size/lumen)
 
 > This fork restores the v2.5.0 diff rendering: empty placeholder lines (no stripes) and darker-terminal-friendly colors.
+Build locally with `cargo install --path . --locked`
 
 A command-line tool that uses AI to streamline your git workflow - generate commit messages, view diff and explain changes.
 ![CleanShot 2025-12-30 at 02 47 04](https://github.com/user-attachments/assets/21e9d32a-de8a-40b2-b79b-3e87c9cbb9eb)
 
 ## Table of Contents
+
 - [Features](#features-)
 - [Getting Started](#getting-started-)
   - [Prerequisites](#prerequisites)
@@ -42,7 +44,9 @@ A command-line tool that uses AI to streamline your git workflow - generate comm
 ## Getting Started 🔅
 
 ### Prerequisites
+
 Before you begin, ensure you have:
+
 1. `git` installed on your system
 2. [fzf](https://github.com/junegunn/fzf) (optional) - Required for `lumen explain --list` command
 3. [mdcat](https://github.com/swsnr/mdcat) (optional) - Required for pretty output formatting
@@ -50,15 +54,18 @@ Before you begin, ensure you have:
 ### Installation
 
 #### Using Homebrew (MacOS and Linux)
+
 ```bash
 brew install jnsahaj/lumen/lumen
 ```
 
 #### Using Cargo
+>
 > [!IMPORTANT]
 > `cargo` is a package manager for `rust`,
 > and is installed automatically when you install `rust`.
 > See [installation guide](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+
 ```bash
 cargo install lumen
 ```
@@ -72,6 +79,7 @@ lumen configure
 ```
 
 This will guide you through:
+
 1. Selecting an AI provider
 2. Entering your API key (optional if using environment variable)
 3. Specifying a custom model name (optional - press Enter to use the default)
@@ -80,7 +88,6 @@ The configuration is saved to `~/.config/lumen/lumen.config.json`.
 
 > [!NOTE]
 > The `diff` command works without any configuration - it's a standalone visual diff viewer.
-
 
 ## Usage 🔅
 
@@ -97,7 +104,6 @@ lumen draft
 lumen draft --context "match brand guidelines"
 # Output: "feat(button.tsx): Update button color to align with brand identity guidelines"
 ```
-
 
 ### Generate Git Commands
 
@@ -139,6 +145,7 @@ lumen diff --watch
 When viewing a PR, you can mark files as viewed (syncs with GitHub) using the `space` keybinding.
 
 Keybindings in the diff viewer:
+
 - `j/k` or arrow keys: Navigate
 - `{/}`: Jump between hunks
 - `tab`: Toggle sidebar
@@ -171,6 +178,7 @@ lumen explain --list                  # Select commit interactively
 ```
 
 ### Interactive Mode
+
 ```bash
 # Launch interactive fuzzy finder to search through commits (requires: fzf)
 lumen explain --list
@@ -196,6 +204,7 @@ lumen draft | git commit -F -
 ```
 
 If you are using [lazygit](https://github.com/jesseduffield/lazygit), you can add this to the [user config](https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md)
+
 ```yml
 customCommands:
   - key: '<c-l>'
@@ -245,6 +254,7 @@ export LUMEN_AI_MODEL="gpt-5-mini"
 ## Advanced Configuration 🔅
 
 ### Configuration File
+
 Lumen supports configuration through a JSON file. You can place the configuration file in one of the following locations:
 
 1. Project Root: Create a lumen.config.json file in your project's root directory.
@@ -284,13 +294,16 @@ Lumen will load configurations in the following order of priority:
 ```
 
 ### Configuration Precedence
+
 Options are applied in the following order (highest to lowest priority):
+
 1. CLI Flags
 2. Configuration File
 3. Environment Variables
 4. Default options
 
 Example: Using different providers for different projects:
+
 ```bash
 # Set global defaults in .zshrc/.bashrc
 export LUMEN_AI_PROVIDER="openai"
@@ -306,6 +319,7 @@ export LUMEN_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
 # Or override using CLI flags
 lumen -p "ollama" -m "llama3.2" draft
 ```
+
 ## Contributors
 
 <a href="https://github.com/jnsahaj/lumen/graphs/contributors">
