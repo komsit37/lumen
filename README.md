@@ -5,6 +5,8 @@
 ![GitHub License](https://img.shields.io/github/license/jnsahaj/lumen)
 ![Crates.io Size](https://img.shields.io/crates/size/lumen)
 
+> This fork restores the v2.5.0 diff rendering: empty placeholder lines (no stripes) and darker-terminal-friendly colors.
+
 A command-line tool that uses AI to streamline your git workflow - generate commit messages, view diff and explain changes.
 ![CleanShot 2025-12-30 at 02 47 04](https://github.com/user-attachments/assets/21e9d32a-de8a-40b2-b79b-3e87c9cbb9eb)
 

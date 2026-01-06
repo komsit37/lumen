@@ -18,12 +18,6 @@ use crate::command::diff::PrInfo;
 use super::footer::{render_footer, FooterData};
 use super::sidebar::render_sidebar;
 
-/// Generates a diagonal stripe pattern for empty placeholder lines in the diff view.
-/// The pattern uses forward slashes to create a visual distinction for empty areas.
-fn generate_stripe_pattern(width: usize) -> String {
-    "╱".repeat(width)
-}
-
 pub struct LineStats {
     pub added: usize,
     pub removed: usize,
@@ -253,7 +247,7 @@ pub fn render_diff(
         for (i, diff_line) in visible_lines.iter().enumerate() {
             let line_idx = scroll as usize + i;
             if let Some((num, text)) = &diff_line.new_line {
-                let prefix = format!("{:4}  ", num);
+                let prefix = format!("{:4} | ", num);
                 let mut spans: Vec<Span> = vec![Span::styled(
                     prefix,
                     Style::default()
@@ -304,7 +298,7 @@ pub fn render_diff(
         for (i, diff_line) in visible_lines.iter().enumerate() {
             let line_idx = scroll as usize + i;
             if let Some((num, text)) = &diff_line.old_line {
-                let prefix = format!("{:4}  ", num);
+                let prefix = format!("{:4} | ", num);
                 let mut spans: Vec<Span> = vec![Span::styled(
                     prefix,
                     Style::default()
@@ -416,7 +410,7 @@ pub fn render_diff(
                 let mut old_spans: Vec<Span> = Vec::new();
                 match &diff_line.old_line {
                     Some((num, text)) => {
-                        let prefix = format!("{:4}  ", num);
+                        let prefix = format!("{:4} | ", num);
                         old_spans.push(Span::styled(
                             prefix,
                             Style::default()
@@ -432,16 +426,9 @@ pub fn render_diff(
                         ));
                     }
                     None => {
-                        let panel_width = old_area.map(|a| a.width as usize).unwrap_or(80);
-                        let content_width = panel_width.saturating_sub(8); // Account for borders and padding
-                        let pattern = generate_stripe_pattern(content_width);
                         old_spans.push(Span::styled(
-                            "      ",
-                            Style::default().fg(t.diff.empty_placeholder_fg),
-                        ));
-                        old_spans.push(Span::styled(
-                            pattern,
-                            Style::default().fg(t.diff.empty_placeholder_fg),
+                            "     |",
+                            Style::default().fg(t.ui.line_number),
                         ));
                     }
                 }
@@ -452,7 +439,7 @@ pub fn render_diff(
                 let mut new_spans: Vec<Span> = Vec::new();
                 match &diff_line.new_line {
                     Some((num, text)) => {
-                        let prefix = format!("{:4}  ", num);
+                        let prefix = format!("{:4} | ", num);
                         new_spans.push(Span::styled(
                             prefix,
                             Style::default()
@@ -468,16 +455,9 @@ pub fn render_diff(
                         ));
                     }
                     None => {
-                        let panel_width = new_area.map(|a| a.width as usize).unwrap_or(80);
-                        let content_width = panel_width.saturating_sub(8); // Account for borders and padding
-                        let pattern = generate_stripe_pattern(content_width);
                         new_spans.push(Span::styled(
-                            "      ",
-                            Style::default().fg(t.diff.empty_placeholder_fg),
-                        ));
-                        new_spans.push(Span::styled(
-                            pattern,
-                            Style::default().fg(t.diff.empty_placeholder_fg),
+                            "     |",
+                            Style::default().fg(t.ui.line_number),
                         ));
                     }
                 }

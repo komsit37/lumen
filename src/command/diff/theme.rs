@@ -11,11 +11,7 @@ pub enum ThemeMode {
 
 impl ThemeMode {
     pub fn detect() -> Self {
-        match dark_light::detect() {
-            dark_light::Mode::Dark => ThemeMode::Dark,
-            dark_light::Mode::Light => ThemeMode::Light,
-            dark_light::Mode::Default => ThemeMode::Dark,
-        }
+        ThemeMode::Dark
     }
 }
 
@@ -110,14 +106,14 @@ impl Theme {
                 default_text: Color::Rgb(230, 230, 230),
             },
             diff: DiffColors {
-                added_bg: Color::Rgb(35, 50, 40),
-                added_gutter_bg: Color::Rgb(40, 80, 50),
-                added_gutter_fg: Color::Rgb(140, 200, 160),
-                deleted_bg: Color::Rgb(50, 35, 35),
-                deleted_gutter_bg: Color::Rgb(80, 40, 40),
-                deleted_gutter_fg: Color::Rgb(200, 140, 140),
+                added_bg: Color::Rgb(30, 60, 30),
+                added_gutter_bg: Color::Rgb(30, 60, 30),
+                added_gutter_fg: Color::DarkGray,
+                deleted_bg: Color::Rgb(60, 30, 30),
+                deleted_gutter_bg: Color::Rgb(60, 30, 30),
+                deleted_gutter_fg: Color::DarkGray,
                 context_bg: Color::Rgb(40, 40, 50),
-                empty_placeholder_fg: Color::Rgb(55, 60, 70),
+                empty_placeholder_fg: Color::DarkGray,
             },
             ui: UiColors {
                 border_focused: Color::Cyan,
